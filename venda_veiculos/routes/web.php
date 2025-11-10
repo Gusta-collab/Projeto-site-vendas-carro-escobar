@@ -18,3 +18,13 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+//template carros rotas do carro vão ficar em seguida ok?
+use App\Http\Controllers\PublicoController;
+
+ Route::view('/carros','carros.index') -> name('carros.index');
+
+ Route::get('/',[PublicoController::class,'index'])->name('home');
+
+ require __DIR__.'/auth.php';
