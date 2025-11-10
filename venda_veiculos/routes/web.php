@@ -28,3 +28,6 @@ use App\Http\Controllers\PublicoController;
  Route::get('/',[PublicoController::class,'index'])->name('home');
 
  require __DIR__.'/auth.php';
+
+ //rota para a aba de detalhes do carro
+ Route::get('veiculo/{veiculo}',[PublicoController::class,'show'])->name('veiculo.show');

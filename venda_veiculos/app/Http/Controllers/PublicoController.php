@@ -23,5 +23,10 @@ class PublicoController extends Controller
         return view('publico.index', compact('veiculos'));
     }
     
-    // O próximo método 'show' virá aqui
+    public function show($id)
+    {
+        $veiculo = \App\Models\Veiculo::with(['modelo.marca','cor'])->FindOrFail($id);
+
+        return view('publico.show', compact('veiculo'));
+    }
 }
