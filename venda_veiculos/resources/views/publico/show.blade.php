@@ -1,62 +1,60 @@
 @extends('layouts.publico')
 
 @section('content')
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-4xl mx-auto">
+    <div class="bg-gray-800 rounded-xl shadow-2xl animate_slower overflow-hidden max-w-6xl mx-auto border border-gray-700 animate__animated animate__fadeIn">
         
-        {{-- SEÇÃO DAS FOTOS --}}
-        <div>
-            {{-- Foto Principal (foto_1) --}}
-            <img src="{{ $veiculo->foto_1 }}" alt="Foto principal de {{ $veiculo->modelo->nome }}" class="w-full h-96 object-cover">
-
-            {{-- Fotos Adicionais (foto_2 e foto_3) --}}
-            <div class="grid grid-cols-2 gap-2 p-4">
-                <img src="{{ $veiculo->foto_2 }}" alt="Foto 2" class="w-full h-48 object-cover rounded-lg">
-                <img src="{{ $veiculo->foto_3 }}" alt="Foto 3" class="w-full h-48 object-cover rounded-lg">
-            </div>
-        </div>
-
-        {{-- SEÇÃO DE INFORMAÇÕES --}}
-        <div class="p-6">
-            {{-- Título --}}
-            <h1 class="text-3xl font-bold mb-2">
-                {{ $veiculo->modelo->marca->nome }} {{ $veiculo->modelo->nome }}
-            </h1>
-            
-            {{-- Preço --}}
-            <p class="text-4xl font-bold text-blue-600 mb-6">
-                R$ {{ number_format($veiculo->valor, 2, ',', '.') }}
-            </p>
-
-            {{-- Tabela de Detalhes (Ano, KM, Cor) --}}
-            <div class="grid grid-cols-3 gap-4 mb-6 text-center">
-                <div>
-                    <span class="block text-sm text-gray-500">Ano</span>
-                    <span class="text-lg font-semibold">{{ $veiculo->ano }}</span>
-                </div>
-                <div>
-                    <span class="block text-sm text-gray-500">Quilometragem</span>
-                    <span class="text-lg font-semibold">{{ $veiculo->quilometragem }} km</span>
-                </div>
-                <div>
-                    <span class="block text-sm text-gray-500">Cor</span>
-                    <span class="text-lg font-semibold">{{ $veiculo->cor->nome }}</span>
-                </div>
-            </div>
-
-            {{-- Descrição (Campo "detalhes") --}}
-            <div>
-                <h3 class="text-xl font-semibold mb-2">Descrição</h3>
-                <p class="text-gray-700 leading-relaxed">
-                    {{ $veiculo->detalhes }}
+        <div class="p-8">
+            <div class="mb-6 border-b border-gray-700 pb-4">
+                <h1 class="text-4xl font-extrabold text-indigo-400 mb-1">
+                    {{ $veiculo->modelo->marca->nome }} {{ $veiculo->modelo->nome }}
+                </h1>
+                <p class="text-3xl font-bold text-green-400">
+                    R$ {{ number_format($veiculo->valor, 2, ',', '.') }}
                 </p>
             </div>
 
-            {{-- Link para Voltar --}}
-            <div class="mt-8 text-center">
-                <a href="{{ route('home') }}" class="text-indigo-600 hover:text-indigo-800 font-medium">
-                    &larr; Voltar para a listagem
-                </a>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+                
+                <div class="lg:col-span-2">
+                    <img src="{{ $veiculo->foto_1 }}" alt="Foto principal de {{ $veiculo->modelo->nome }}" class="w-full h-96 object-cover rounded-lg shadow-lg border border-gray-600">
+                </div>
+
+                <div class="flex flex-col space-y-4">
+                    <img src="{{ $veiculo->foto_2 }}" alt="Foto 2" class="w-full h-48 object-cover rounded-lg shadow-md border border-gray-600">
+                    <img src="{{ $veiculo->foto_3 }}" alt="Foto 3" class="w-full h-48 object-cover rounded-lg shadow-md border border-gray-600">
+                </div>
             </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                  <!-- animação na parte de especificações  -->
+                <div class="lg:col-span-1 bg-gray-900 p-6 rounded-xl shadow-inner border border-gray-700 animate__animated animate__fadeInUp animate__delay-1s">
+                    <h3 class="text-xl font-semibold text-gray-100 mb-4 border-b border-indigo-500/50 pb-2">
+                        Especificações Rápidas
+                    </h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p><strong class="text-gray-100">Ano:</strong> {{ $veiculo->ano }}</p>
+                        <p><strong class="text-gray-100">Cor:</strong> {{ $veiculo->cor->nome }}</p>
+                        <p><strong class="text-gray-100">KM:</strong> {{ number_format($veiculo->quilometragem, 0, ',', '.') }} km</p>
+                        <p><strong class="text-gray-100">Valor FIPE:</strong> (A negociar)</p>
+                    </div>
+                </div>
+
+                <!-- animação na parte de detalhes -->
+                <div class="lg:col-span-2 animate__animated animate__fadeInUp animate__delay-2s">
+                    <h3 class="text-2xl font-semibold text-gray-100 mb-4">Detalhes do Veículo</h3>
+                    <p class="text-gray-300 leading-relaxed bg-gray-900 p-4 rounded-lg shadow-inner border border-gray-700">
+                        {{ $veiculo->detalhes }}
+                    </p>
+
+                    <div class="mt-8 text-left">
+                        <a href="{{ route('home') }}" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors duration-200">
+                            &larr; Voltar para a listagem
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
 @endsection

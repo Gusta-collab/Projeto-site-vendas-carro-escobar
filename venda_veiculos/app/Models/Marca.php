@@ -9,6 +9,8 @@ class Marca extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nome'];
+    
     // Relacionamento
     public function modelos()
     {

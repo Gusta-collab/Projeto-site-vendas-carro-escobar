@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Marca;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class MarcaController extends Controller
 {
@@ -13,7 +14,9 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        //
+        $marcas = Marca::all();
+
+        return view('admin.marcas.index', compact('marcas'));
     }
 
     /**
@@ -21,7 +24,8 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        //
+        // 
+        return view('admin.marcas.create');
     }
 
     /**
@@ -30,6 +34,19 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         //
+        // 1. Valida os dados recebidos
+        $request->validate([
+            'nome' => 'required|string|max:255|unique:marcas'
+        ], [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'nome.unique' => 'Esta marca já existe.'
+        ]);
+
+        Marca::create([
+            'nome' => $request->nome
+        ]);
+
+        return redirect()->route('admin.marcas.index')->with('sucesso', 'Marca cadastrada com sucesso!');
     }
 
     /**
@@ -46,6 +63,7 @@ class MarcaController extends Controller
     public function edit(Marca $marca)
     {
         //
+        return view('admin.marcas.edit', compact('marca'));
     }
 
     /**
@@ -53,7 +71,18 @@ class MarcaController extends Controller
      */
     public function update(Request $request, Marca $marca)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255|unique:marcas,nome,' . $marca->id
+        ], [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'nome.unique' => 'Esta marca já existe.'
+        ]);
+
+        $marca->update([
+            'nome' => $request->nome
+        ]);
+
+        return redirect()->route('admin.marcas.index')->with('sucesso', 'Marca atualizada com sucesso!');
     }
 
     /**
@@ -61,6 +90,24 @@ class MarcaController extends Controller
      */
     public function destroy(Marca $marca)
     {
-        //
+    try 
+    {
+    // 1. Tenta apagar a marca
+    $marca->delete();
+
+    // 2. Se conseguir, retorna com a mensagem de sucesso
+    return redirect()->route('admin.marcas.index')->with('sucesso', 'Marca excluída com sucesso!');
+
+    } catch (QueryException $e) {
+                
+        // 3. Se o try falhar, o catch é ativado
+        if ($e->getCode() == "23000") {
+            // 4. Se for, retorna com uma mensagem de erro
+            return redirect()->route('admin.marcas.index')->with('erro', 'Esta marca não pode ser excluída, pois está sendo usada por um ou mais modelos.');
+        }
+
+        // 5. Se for qualquer outro erro, mostra o erro
+        return redirect()->route('admin.marcas.index')->with('erro', 'Ocorreu um erro inesperado ao excluir a marca.');
     }
+}
 }

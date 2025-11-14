@@ -9,7 +9,18 @@ class Veiculo extends Model
 {
     use HasFactory;
 
-    // Relacionamentos
+    protected $fillable = [
+        'modelo_id',
+        'cor_id',
+        'ano',
+        'quilometragem',
+        'valor',
+        'detalhes',
+        'foto_1',
+        'foto_2',
+        'foto_3',
+    ];
+
     public function modelo()
     {
         return $this->belongsTo(Modelo::class);
@@ -17,11 +28,6 @@ class Veiculo extends Model
 
     public function cor()
     {
-        return $this->belongsTo(Cor::class);
-    }
-
-    public function fotos()
-    {
-        return $this->hasMany(Foto::class);
+        return $this->belongsTo(Cor::class,'cor_id');
     }
 }
