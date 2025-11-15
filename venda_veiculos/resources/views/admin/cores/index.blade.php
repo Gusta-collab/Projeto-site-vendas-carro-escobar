@@ -1,84 +1,81 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        </h2>
+        <h2 class="font-semibold text-xl text-gray-200 leading-tight"></h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    
+            <div class="bg-neutral-900 overflow-hidden shadow-sm sm:rounded-lg border border-neutral-800">
+                <div class="p-6 text-gray-200">
+
                     @if (session('sucesso'))
-                        <div class="mb-4 rounded-lg bg-green-100 p-4 text-sm text-green-700" role="alert">
+                        <div class="mb-4 rounded-lg bg-green-900 p-4 text-sm text-green-300">
                             {{ session('sucesso') }}
                         </div>
                     @endif
+
                     @if (session('erro'))
-                        <div class="mb-4 rounded-lg bg-red-100 p-4 text-sm text-red-700" role="alert">
+                        <div class="mb-4 rounded-lg bg-red-900 p-4 text-sm text-red-300">
                             {{ session('erro') }}
                         </div>
                     @endif
 
-
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-semibold">Lista de Cores</h3>
-                        
+                        <h3 class="text-lg font-semibold text-gray-100">Lista de Cores</h3>
 
-                        <a href="{{ route('admin.cores.create') }}" class="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded">
+                        <a href="{{ route('admin.cores.create') }}" class="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                             + Adicionar Cor
                         </a>
                     </div>
 
-                    <!-- tabela -->
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
+                    <table class="min-w-full divide-y divide-neutral-700">
+                        <thead class="bg-neutral-800">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                     ID
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                     Nome
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">
                                     Ações
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            
+
+                        <tbody class="bg-neutral-900 divide-y divide-neutral-800">
                             @forelse ($cores as $cor)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                                         {{ $cor->id }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-200">
                                         {{ $cor->nome }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{{ route('admin.cores.edit', $cor) }}" class="text-indigo-600 hover:text-indigo-900">Editar</a> 
-                                        
-                                        <!-- deletar -->
+                                        <a href="{{ route('admin.cores.edit', $cor) }}" class="text-indigo-400 hover:text-indigo-300">Editar</a>
+
                                         <form method="POST" action="{{ route('admin.cores.destroy', $cor) }}" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                                class="text-red-600 hover:text-red-900 ml-4"
-                                                onclick="return confirm('Tem certeza que deseja excluir esta cor? Não é possível reverter esta ação.')">
-                                            Excluir
-                                        </button>
-                                    </form>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                    class="text-red-500 hover:text-red-400 ml-4"
+                                                    onclick="return confirm('Tem certeza que deseja excluir esta cor? Não é possível reverter esta ação.')">
+                                                Excluir
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                    <td colspan="3" class="px-6 py-4 whitespace-nowrap text-sm text-gray-400 text-center">
                                         Nenhuma cor cadastrada.
                                     </td>
                                 </tr>
                             @endforelse
                         </tbody>
+
                     </table>
 
                 </div>

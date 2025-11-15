@@ -24,7 +24,6 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        // 
         return view('admin.marcas.create');
     }
 
@@ -33,8 +32,7 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // 1. Valida os dados recebidos
+        
         $request->validate([
             'nome' => 'required|string|max:255|unique:marcas'
         ], [
@@ -62,7 +60,6 @@ class MarcaController extends Controller
      */
     public function edit(Marca $marca)
     {
-        //
         return view('admin.marcas.edit', compact('marca'));
     }
 
@@ -95,18 +92,15 @@ class MarcaController extends Controller
     // 1. Tenta apagar a marca
     $marca->delete();
 
-    // 2. Se conseguir, retorna com a mensagem de sucesso
     return redirect()->route('admin.marcas.index')->with('sucesso', 'Marca excluída com sucesso!');
 
     } catch (QueryException $e) {
                 
-        // 3. Se o try falhar, o catch é ativado
         if ($e->getCode() == "23000") {
-            // 4. Se for, retorna com uma mensagem de erro
+            
             return redirect()->route('admin.marcas.index')->with('erro', 'Esta marca não pode ser excluída, pois está sendo usada por um ou mais modelos.');
         }
 
-        // 5. Se for qualquer outro erro, mostra o erro
         return redirect()->route('admin.marcas.index')->with('erro', 'Ocorreu um erro inesperado ao excluir a marca.');
     }
 }

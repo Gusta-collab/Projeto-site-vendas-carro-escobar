@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*:focus {
+    --tw-ring-color: transparent !important;
+    --tw-ring-offset-color: transparent !important;
+    outline: none !important;
+}
+
+select, input {
+    border-color: #1f1f1f !important;
+    background-color: #111 !important;
+    color: #ddd !important;
+}
+
+select:focus, input:focus {
+    border-color: #333 !important;
+}

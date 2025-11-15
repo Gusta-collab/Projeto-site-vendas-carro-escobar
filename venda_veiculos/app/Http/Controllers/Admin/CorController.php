@@ -32,7 +32,6 @@ class CorController extends Controller
      */
     public function store(Request $request)
     {
-        // 1.Validação
         $request->validate([
             'nome' => 'required|string|max:255|unique:cors'
         ], [
@@ -75,12 +74,10 @@ class CorController extends Controller
             'nome.unique' => 'Esta cor já existe.'
         ]);
 
-        // 2. Atualiza a cor no banco
         $cor->update([
             'nome' => $request->nome
         ]);
 
-        // 3. Redireciona de volta para a lista com mensagem
         return redirect()->route('admin.cores.index')->with('sucesso', 'Cor atualizada com sucesso!');
     }
 
