@@ -148,3 +148,5 @@ O site estará disponível em `http://127.0.0.1:8000/`.
 
 **7. Gerenciamento de marcas**
 ![Print do CRUD de marcas](prints/listaMarcas.png)
+
+**caso os prints não apareçam todos estão na pasta prints na raiz e dentro do projeto.
