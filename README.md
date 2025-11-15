@@ -1,4 +1,4 @@
-# 🚗 Site de Venda de Veículos (Projeto Laravel)
+#Site de Venda de Veículos (Projeto Laravel)
 
 Este projeto simula um portal de vendas de automóveis (similar ao Webmotors ou iCarros), desenvolvido com **Laravel** e **Tailwind CSS**.
 
@@ -6,7 +6,7 @@ O sistema possui uma **Área Pública** (para visitantes) e uma **Área Administ
 
 **Status do Projeto:** 100% Concluído.
 
-## 🔑 Credenciais de Acesso (Administrador)
+##Credenciais de Acesso (Administrador)
 
 Para aceder à Área Administrativa, utilize as seguintes credenciais:
 
@@ -16,7 +16,7 @@ Para aceder à Área Administrativa, utilize as seguintes credenciais:
 
 Após o login, você será redirecionado para o painel principal em `/admin/veiculos`.
 
-## 🚀 Como Rodar o Projeto
+##Como Rodar o Projeto
 
 Siga estes passos para configurar e executar o projeto na sua máquina local.
 
@@ -123,7 +123,7 @@ Siga estes passos para configurar e executar o projeto na sua máquina local.
 
 O site estará disponível em `http://127.0.0.1:8000/`.
 
-## 📸 Prints de Tela :
+##Prints de Tela :
 
 
 **1. Página Inicial (Listagem)**
